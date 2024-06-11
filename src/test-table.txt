@@ -1,0 +1,25 @@
+# Test table of haplotypes and observed allele counts
+# Made up data. T=target SNP; L=linked SNP
+# 1. chr of T
+# 2. pos of T
+# 3. rsID of T
+# 4. chr of L
+# 5. pos of L
+# 6. rsID of L
+# 7. T0L0 counts in panel
+# 8. T0L1 counts in panel
+# 9. T1L0 counts in panel
+# 10. T1L1 counts in panel
+# 11. L0 observations in sequence data
+# 12. L1 observations in sequence data
+1 100 rsEX1 1 100 rsEX1 A C 1000 0 0 1000 2 0
+1 100 rsEX1 1 110 rsEX2 A G 900 100 100 900 2 1
+1 100 rsEX1 1 120 rsEX3 A T 800 200 200 800 2 0
+1 100 rsEX1 1 130 rsEX3 C A 600 400 500 500 3 2
+1 500 rsEX6 1 500 rsEX6 C G 900 0 0 1100 1 0
+1 500 rsEX6 1 410 rsEX4 C T 400 500 600 500 2 1
+1 500 rsEX6 1 450 rsEX5 A C 300 600 900 200 1 2
+1 500 rsEX6 1 520 rsEX7 A C 800 100 50 1050 1 1
+1 600 rsEX8 1 540 rsEX8 A C 1000 0 0 1000 1 0
+1 600 rsEX8 1 580 rsEX9 A C 1000 0 999 1 0 1
+1 600 rsEX8 1 620 rsEX10 T T 1000 0 999 1 1 0

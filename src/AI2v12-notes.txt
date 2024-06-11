@@ -1,0 +1,51 @@
+astrea-impute2.12 - multithreaded by default; makes VCF output now with -V flag
+Note: make sure to specific version of genome (19 or 38) with -g flag option
+
+# Recommended invocation for hair data
+${ASTREA}/astrea-impute2.14 \
+   -H ${HT}/GRC38-v2-chr${CHR}-ht.txt.gz \
+   -m mpileup/${SAMP}.${CHR}.mp.txt.gz \
+   -g 38 -M 10 -I ${SAMP} -b ${BOY} -V \
+   -B 20 -G 1 \
+   | bgzip > vcfs/${SAMP}.hg38.${CHR}.ai2.B20G1.vcf.gz
+
+
+# Run beagle5 to call a fuller list of sites.
+java -jar /usr/local/src/beagle-5.4/beagle.22Jul22.46e.jar \
+       gt=vcfs/${SAMP}.hg38.${CHR}.ai2.B20G1.vcf.gz \
+       out=vcfs/${SAMP}.hg38.${CHR}.ai2.B20G1.beagle5.4 \
+       ref=${BREF}/chr${CHR}.1kg.high-cov.b38.bref3 \
+       map=${MAP}/plink.chr${CHR}.GRCh38.wchr.map \
+       gp=true
+
+# VCF2 genotype.pl converts VCF to genotype format. It also does
+# filtered and sanity-checking using the original mpileup data.
+# This is necessary and good because the beagle run will call
+# genotypes at lots of sites without the benefit of having looked
+# at any source data that we actually do have!
+# in dat/ are:
+# rsid.chr.pos.hg19.v4.txt file (has rsID, chromosome, and
+# position info for output genotype file for sites we will call)
+# rsIDs-to-revcom.v2.txt - list of rsIDs of sites that are not on
+# the same strand on HG38 vs HG19 and should therefore have their
+# genotype calls reversed.
+${ASTREA}/VCF2genotype.pl \
+        -P 0.99 \
+        -v vcfs/${SAMP}.hg38.${CHR}.ai2.B20G1.beagle5.4.vcf.gz \
+        -r /data/GenotypeFiles/rsid.chr.pos.hg19.v4.txt \
+        -m mpileup/${SAMP}.${CHR}.mp.txt.gz \
+        -R /data/UCSC-tables/rsIDs-to-revcom.v2.txt \
+        > genotype-files/${SAMP}.hg19.${CHR}.cutB20G1.P0.99.gt.txt
+
+# Concatentate all the Genotype files over all the chromosomes, adding
+# appropriate header info
+# (do that however is convenient)
+
+
+# Remove "obvious" homozygous calls to tamp down matchiness. Requires
+# file of allele frequencies (included in dat/)
+./matchy-filter-genotype.pl \
+        -g genotype-files/${SAMP}.ai2v12.gt.v12.txt -p 0.96 \
+	-t ../dat/AncestryDNA_v2_23andme_v2_v3_GSAv3.hg19.rsID.ALL_CHRS.info.txt
+	> genotype-files/${SAMP}.ai2v12.gt.v12m96.txt
+

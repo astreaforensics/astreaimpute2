@@ -1,10 +1,12 @@
 # astreaimpute2
 
 (c) Astrea Forensics, Ed Green - 2024
+
+v14
+
 Multithreaded software for generating genotype files or VCFs from mpileup data and haplotype records.
 
-Note: make sure to specific version of genome (19 or 38) with -g flag option
-
+```
 OPTIONS:
 
 -H [required] Input file of haplotypes
@@ -52,11 +54,13 @@ OPTIONS:
 Sites with Bayes Factor and Genotype likelihood ratios
 better than the cutoff will be included in the output
 VCF file with PASS in the FILTER field.
+```
 
+OUTPUT: 
 
-OUTPUT: SNP_ID	chr	pos	Allele1	Allele2
+VCF or genotype file with format:
 
-astrea-impute2.14 - multithreaded by default; makes VCF output now with -V flag
+SNP_ID	chr	pos	Allele1	Allele2
 
 
 ### Recommended invocation for hair data

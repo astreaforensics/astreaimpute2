@@ -58,15 +58,15 @@ VCF file with PASS in the FILTER field.
 
 OUTPUT: 
 
-VCF or genotype file with format:
-
-SNP_ID	chr	pos	Allele1	Allele2
+VCF or genotype file with format: `SNP_ID	chr	pos	Allele1	Allele2`
 
 
 ### Recommended invocation for hair data
-${ASTREA}/astrea-impute2.14 \
-   -H ${HT}/GRC38-v2-chr${CHR}-ht.txt.gz \
-   -m mpileup/${SAMP}.${CHR}.mp.txt.gz \
-   -g 38 -M 10 -I ${SAMP} -b ${BOY} -V \
-   -B 20 -G 1 \
+```
+${ASTREA}/astrea-impute2.14 
+   -H ${HT}/GRC38-v2-chr${CHR}-ht.txt.gz 
+   -m mpileup/${SAMP}.${CHR}.mp.txt.gz 
+   -g 38 -M 10 -I ${SAMP} -b ${BOY} -V 
+   -B 20 -G 1 
    | bgzip > vcfs/${SAMP}.hg38.${CHR}.ai2.B20G1.vcf.gz
+```

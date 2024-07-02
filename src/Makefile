@@ -7,7 +7,7 @@ CFLAGS=-gdwarf-2 -g
 #   Astrea Forensics
 
 OBJ=local-impute.o file-io.o sam-parse.o pileup.o hap.o
-EXE=astrea-impute score-filter-sam astrea-impute2
+EXE=score-filter-sam astrea-impute2.14 test-pileup test-hap hap2af-table
 
 all: $(EXE)
 
@@ -56,10 +56,6 @@ test-hap : test-hap.c hap.o file-io.o
 test-stats : test-stats.c stats.o
 	echo "Making test-stats..."
 	$(CC) $(CFLAGS) stats.o -o test-stats test-stats.c -lm
-
-astrea-impute : astrea-impute.c local-impute.o file-io.o
-	echo "Making astrea-impute..."
-	$(CC) $(CFLAGS) local-impute.o file-io.o -lz -o astrea-impute astrea-impute.c -lm
 
 astrea-impute2.14 : astrea-impute2.14.c hap.o file-io.o pileup.o stats.o
 	echo "Making astrea-impute2..."

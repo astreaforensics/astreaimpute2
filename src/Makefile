@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-gdwarf-2 -g
+CFLAGS=-gdwarf-2 -ggdb
 #CFLAGS=-O2
 #CFLAGS=-gdwarf-2 -g
 
@@ -13,6 +13,9 @@ all: $(EXE)
 
 clean:
 	rm -f $(OBJ) $(EXE)
+
+test: t/test.sh
+	./t/test.sh
 
 stats.o : stats.h stats.c
 	echo "Making stats.o..."

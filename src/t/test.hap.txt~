@@ -1,0 +1,9 @@
+## TARGET 1000 A C rsTEST1
+1  900	  G    T rsTEST1A1
+1  1000	  A    C rsTEST1
+1  1100	  G    T rsTEST1B1
+## Haplotypes
+## _*_
+1  000
+1  010
+## E_R

@@ -7,3 +7,12 @@
 2  000
 2  111
 ## E_R
+## TARGET 2000 A C rsTEST2
+1  1900	  G    T rsTEST2A1
+1  2000	  A    C rsTEST2
+1  2100	  G    T rsTEST2B1
+## Haplotypes
+## _*_
+1  000
+2  111
+## E_R

@@ -39,7 +39,7 @@ better than the cutoff will be included in the output
 VCF file with PASS in the FILTER field.
 ```
 
-###OUTPUT: 
+### OUTPUT: 
 Generates  tab-delimited output of this format:
 `SNP_ID  chr     pos     Allele1 Allele2 call_LR Alt_fr  BayesFac`
 
@@ -121,7 +121,9 @@ properly formatted Haplotype files.
 ### Description of input mpileup format
 astrea-impute2.14 requires mpileup format input data as generated
 by `samtools Version 1.10` using this syntax:
+
 `samtools mpileup -q 20 -Q 20 -s -a -f ${HG} -l ${SITE_POSITIONS} ${BAM_FILE}`
+
 where `${HG}` is the reference genome, `${SITE_POSITIONS}` is a file
 listing the genome positions at which to make mpileup output,
 i.e., all the positions listed in any Haplotype record, and
@@ -130,7 +132,6 @@ aligned input sequence data.
 
 The `-q` and `-Q` arguments can be set to appropriate map quality
 and base quality cutoffs.
-
 
 `test-pileup` is a validation program that can be used to test for
 properly formated mpileup files.

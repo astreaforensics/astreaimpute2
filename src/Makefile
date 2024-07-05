@@ -12,7 +12,7 @@ EXE=score-filter-sam astrea-impute2.14 test-pileup test-hap hap2af-table
 all: $(EXE)
 
 clean:
-	rm -f $(OBJ) $(EXE)
+	rm -f $(OBJ) $(EXE) t/test_out/*
 
 test: t/test.sh
 	./t/test.sh

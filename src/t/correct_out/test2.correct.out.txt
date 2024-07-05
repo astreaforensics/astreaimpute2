@@ -1,0 +1,6 @@
+##fileformat=VCFv4.1
+##filedate=Thu Jul  4 15:52:39 2024
+##source=astrea-impute2 v14
+##astrea-impute2Invocation=./astrea-impute2.14 -H t/test.hap.txt -m t/test.mp.txt -E 0.01 -e 0.01 -V
+##INFO=<ID=AF,Number=A,Type=Float,Description="Allele Frequency">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SampleID

@@ -1,0 +1,63 @@
+Test1 - Simple math check
+E and e are set to 0.01
+P(D|H1,H1) = (1-E)^3 ; P(H1,H1) = 4/16
+P(D|H1,H2) = (1/2)^3 ; P(H1,H2) = 8/16
+P(D|H2,H2) = E^3
+Therefore, BF = (1-E)^3 / (1/2)^3 = 7.762392
+and Genotype LR = 7.762392 x (4/16)/(8/16) = 3.881196
+
+Second haplotype has no data in the mpileup output, so
+Genotype LR and BF should both be 1.0
+
+Test2 - VCF output
+No sites should pass the default BF and GLR ratios (20).
+Therefore, VCF should have only the VCF header info.
+
+Test3 - VCF output
+Same as Test1 and Test2, but reducing BF and GLR cutoffs
+to 3 using the -B and -G switches.
+Output should be homozygous reference call.
+
+Test4 - Further math check
+mpileup data has two reads per site, all reference alleles
+P(D|H1,H1) = (1-E)^2 x (1-E)^2 x (1-E)^2 = 0.941480149401
+P(H1,H1) = 4/16
+P(D|H1,H2) = (1/2)^2 x (1/2)^2 x (1/2)^2 = 0.015625
+P(P1,H2) = 8/16
+Therefore, BF = 0.941480149401/0.015625 = 60.2547295617
+and Genotype LR = 60.2547295617 x (4/16)/(8/16) = 30.1273657808
+
+Second haplotype has no data in mpileup, so GLR & BF = 1.0
+
+Test5 - Math check, heterozygous call
+mpileup data has one ref and one alt read per site
+P(D|H1,H1) = ((1-E) x E)^3 = 9.70299e-07 - 0.000000970299
+P(D|H1,H2) = (1/2)^2 x (1/2)^2 x (1/2)^2 = 0.015625
+Same P(haplotypes) priors as above
+Therefore, BF = 0.015625/9.70299e-07 = 16,103.283627
+and Genotype LR = 16,103.283627 x (8/16)/(4/16) = 32,206.567254
+
+Second haplotype has no data in mpileup, so GLR & BF = 1.0
+
+Test6 - Math check, homozygous alternate call
+mpileup data is the same as Test4, but instead of two reference
+alleles, it has two alternate alleles at each site
+BF and GLR ratios are the same as Test4, but with homozygous
+alt allele calls
+
+Second site, rsTEST2, no has mpileup data, just like Test1:
+one reference allele per site. BF is identical to Test1: 7.762392
+Haplotype frequencies are different now, though, with 1
+haplotype of 000 and 2 haplotypes of 111.
+So, GLR = 7.762392 x (1/4) = 1.940598
+
+Test7 - Extraneous mpileup data
+Same as Test6, but with non-reference and non-alternate allele
+calls in the mpileup data
+These should be ignored making identical output to Test6.
+
+Test8 - Map quality and base quality cutoffs
+Same as Test6, but with two extra reference allele calls.
+But, one is below the map-quality cutoff (ASCII 5) and one
+is below the base-quality cutoff (ASCII 5). Therefore, both should
+be ignored, producing identical output to Test6
